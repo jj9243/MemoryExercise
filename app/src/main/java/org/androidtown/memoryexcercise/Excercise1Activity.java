@@ -132,10 +132,10 @@ public class Excercise1Activity extends AppCompatActivity {
 
     public void initRandom() {
         //랜덤 카테고리 목록들
-        randomCatagory = new String[]{"dog"};
+        randomCatagory = new String[]{"dog", "object"};
 
         //랜덤 카테고리(0 ~)
-        randomnumber0 = (int) (Math.random() * 0);
+        randomnumber0 = (int) (Math.random() * 2);
 
         //랜덤함수 ( 1 ~ 10 )
         randomnumber1 = (int) (Math.random() * 10) + 1;
@@ -151,50 +151,102 @@ public class Excercise1Activity extends AppCompatActivity {
 
     public void initImage() {
         //첫 이미지
-        if (randomImage1.equals("dog1")) {
-            ex1Image.setImageResource(R.drawable.dog1);
-        } else if (randomImage1.equals("dog2")) {
-            ex1Image.setImageResource(R.drawable.dog2);
-        } else if (randomImage1.equals("dog3")) {
-            ex1Image.setImageResource(R.drawable.dog3);
-        } else if (randomImage1.equals("dog4")) {
-            ex1Image.setImageResource(R.drawable.dog4);
-        } else if (randomImage1.equals("dog5")) {
-            ex1Image.setImageResource(R.drawable.dog5);
-        } else if (randomImage1.equals("dog6")) {
-            ex1Image.setImageResource(R.drawable.dog6);
-        } else if (randomImage1.equals("dog7")) {
-            ex1Image.setImageResource(R.drawable.dog7);
-        } else if (randomImage1.equals("dog8")) {
-            ex1Image.setImageResource(R.drawable.dog8);
-        } else if (randomImage1.equals("dog9")) {
-            ex1Image.setImageResource(R.drawable.dog9);
-        } else if (randomImage1.equals("dog10")) {
-            ex1Image.setImageResource(R.drawable.dog10);
+        if (randomImage1.contains("dog")) {
+            if (randomImage1.equals("dog1")) {
+                ex1Image.setImageResource(R.drawable.dog1);
+            } else if (randomImage1.equals("dog2")) {
+                ex1Image.setImageResource(R.drawable.dog2);
+            } else if (randomImage1.equals("dog3")) {
+                ex1Image.setImageResource(R.drawable.dog3);
+            } else if (randomImage1.equals("dog4")) {
+                ex1Image.setImageResource(R.drawable.dog4);
+            } else if (randomImage1.equals("dog5")) {
+                ex1Image.setImageResource(R.drawable.dog5);
+            } else if (randomImage1.equals("dog6")) {
+                ex1Image.setImageResource(R.drawable.dog6);
+            } else if (randomImage1.equals("dog7")) {
+                ex1Image.setImageResource(R.drawable.dog7);
+            } else if (randomImage1.equals("dog8")) {
+                ex1Image.setImageResource(R.drawable.dog8);
+            } else if (randomImage1.equals("dog9")) {
+                ex1Image.setImageResource(R.drawable.dog9);
+            } else if (randomImage1.equals("dog10")) {
+                ex1Image.setImageResource(R.drawable.dog10);
+            }
+        }
+        else if(randomImage1.contains("object"))
+        {
+            if (randomImage1.equals("object1")) {
+                ex1Image.setImageResource(R.drawable.object1);
+            } else if (randomImage1.equals("object2")) {
+                ex1Image.setImageResource(R.drawable.object2);
+            } else if (randomImage1.equals("object3")) {
+                ex1Image.setImageResource(R.drawable.object3);
+            } else if (randomImage1.equals("object4")) {
+                ex1Image.setImageResource(R.drawable.object4);
+            } else if (randomImage1.equals("object5")) {
+                ex1Image.setImageResource(R.drawable.object5);
+            } else if (randomImage1.equals("object6")) {
+                ex1Image.setImageResource(R.drawable.object6);
+            } else if (randomImage1.equals("object7")) {
+                ex1Image.setImageResource(R.drawable.object7);
+            } else if (randomImage1.equals("object8")) {
+                ex1Image.setImageResource(R.drawable.object8);
+            } else if (randomImage1.equals("object9")) {
+                ex1Image.setImageResource(R.drawable.object9);
+            } else if (randomImage1.equals("object10")) {
+                ex1Image.setImageResource(R.drawable.object10);
+            }
         }
     }
 
     public void changeImage() {
-        if (randomImage2.equals("dog1")) {
-            ex1Image.setImageResource(R.drawable.dog1);
-        } else if (randomImage2.equals("dog2")) {
-            ex1Image.setImageResource(R.drawable.dog2);
-        } else if (randomImage2.equals("dog3")) {
-            ex1Image.setImageResource(R.drawable.dog3);
-        } else if (randomImage2.equals("dog4")) {
-            ex1Image.setImageResource(R.drawable.dog4);
-        } else if (randomImage2.equals("dog5")) {
-            ex1Image.setImageResource(R.drawable.dog5);
-        } else if (randomImage2.equals("dog6")) {
-            ex1Image.setImageResource(R.drawable.dog6);
-        } else if (randomImage2.equals("dog7")) {
-            ex1Image.setImageResource(R.drawable.dog7);
-        } else if (randomImage2.equals("dog8")) {
-            ex1Image.setImageResource(R.drawable.dog8);
-        } else if (randomImage2.equals("dog9")) {
-            ex1Image.setImageResource(R.drawable.dog9);
-        } else if (randomImage2.equals("dog10")) {
-            ex1Image.setImageResource(R.drawable.dog10);
+        if (randomImage2.contains("dog")) {
+            if (randomImage2.equals("dog1")) {
+                ex1Image.setImageResource(R.drawable.dog1);
+            } else if (randomImage2.equals("dog2")) {
+                ex1Image.setImageResource(R.drawable.dog2);
+            } else if (randomImage2.equals("dog3")) {
+                ex1Image.setImageResource(R.drawable.dog3);
+            } else if (randomImage2.equals("dog4")) {
+                ex1Image.setImageResource(R.drawable.dog4);
+            } else if (randomImage2.equals("dog5")) {
+                ex1Image.setImageResource(R.drawable.dog5);
+            } else if (randomImage2.equals("dog6")) {
+                ex1Image.setImageResource(R.drawable.dog6);
+            } else if (randomImage2.equals("dog7")) {
+                ex1Image.setImageResource(R.drawable.dog7);
+            } else if (randomImage2.equals("dog8")) {
+                ex1Image.setImageResource(R.drawable.dog8);
+            } else if (randomImage2.equals("dog9")) {
+                ex1Image.setImageResource(R.drawable.dog9);
+            } else if (randomImage2.equals("dog10")) {
+                ex1Image.setImageResource(R.drawable.dog10);
+            }
+        }
+        else if(randomImage2.contains("object"))
+        {
+            if (randomImage2.equals("object1")) {
+                ex1Image.setImageResource(R.drawable.object1);
+            } else if (randomImage2.equals("object2")) {
+                ex1Image.setImageResource(R.drawable.object2);
+            } else if (randomImage2.equals("object3")) {
+                ex1Image.setImageResource(R.drawable.object3);
+            } else if (randomImage2.equals("object4")) {
+                ex1Image.setImageResource(R.drawable.object4);
+            } else if (randomImage2.equals("object5")) {
+                ex1Image.setImageResource(R.drawable.object5);
+            } else if (randomImage2.equals("object6")) {
+                ex1Image.setImageResource(R.drawable.object6);
+            } else if (randomImage2.equals("object7")) {
+                ex1Image.setImageResource(R.drawable.object7);
+            } else if (randomImage2.equals("object8")) {
+                ex1Image.setImageResource(R.drawable.object8);
+            } else if (randomImage2.equals("object9")) {
+                ex1Image.setImageResource(R.drawable.object9);
+            } else if (randomImage2.equals("object10")) {
+                ex1Image.setImageResource(R.drawable.object10);
+            }
         }
     }
 
