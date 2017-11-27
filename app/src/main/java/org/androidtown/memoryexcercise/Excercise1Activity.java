@@ -1,14 +1,20 @@
 package org.androidtown.memoryexcercise;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 박재성 on 2017-11-25.
@@ -30,8 +36,14 @@ public class Excercise1Activity extends AppCompatActivity {
 
     static int problemNumber = 0;
 
+    //타이머
+    CountDownTimer timer = null;
+
     //카운트
     int count = 4;
+
+    //정답 카운트
+    int answerCount = 0;
 
     //랜덤변수
     String randomImage1 = null;
@@ -42,6 +54,9 @@ public class Excercise1Activity extends AppCompatActivity {
     int randomnumber2;
 
     String[] randomCatagory;
+
+    //뒤로가기 버튼 누를시 사용 변수
+    int returnValue = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +87,6 @@ public class Excercise1Activity extends AppCompatActivity {
         initImage();
 
         //카운트 다운
-        CountDownTimer timer = null;
         timer = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -117,7 +131,6 @@ public class Excercise1Activity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void counterProblem() {
@@ -173,9 +186,7 @@ public class Excercise1Activity extends AppCompatActivity {
             } else if (randomImage1.equals("dog10")) {
                 ex1Image.setImageResource(R.drawable.dog10);
             }
-        }
-        else if(randomImage1.contains("object"))
-        {
+        } else if (randomImage1.contains("object")) {
             if (randomImage1.equals("object1")) {
                 ex1Image.setImageResource(R.drawable.object1);
             } else if (randomImage1.equals("object2")) {
@@ -223,9 +234,7 @@ public class Excercise1Activity extends AppCompatActivity {
             } else if (randomImage2.equals("dog10")) {
                 ex1Image.setImageResource(R.drawable.dog10);
             }
-        }
-        else if(randomImage2.contains("object"))
-        {
+        } else if (randomImage2.contains("object")) {
             if (randomImage2.equals("object1")) {
                 ex1Image.setImageResource(R.drawable.object1);
             } else if (randomImage2.equals("object2")) {
@@ -252,8 +261,25 @@ public class Excercise1Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        problemNumber = 0;
-        finish();
+        show();
+    }
+
+    public void show() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Excercise1Activity.super.onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
     }
 }
