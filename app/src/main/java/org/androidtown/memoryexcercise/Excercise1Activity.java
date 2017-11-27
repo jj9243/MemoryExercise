@@ -43,7 +43,7 @@ public class Excercise1Activity extends AppCompatActivity {
     int count = 4;
 
     //정답 카운트
-    int answerCount = 0;
+    static int answerCount = 0;
 
     //랜덤변수
     String randomImage1 = null;
@@ -113,10 +113,96 @@ public class Excercise1Activity extends AppCompatActivity {
         ex1YesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //정답일경우
                 if (randomImage1.equals(randomImage2)) {
-                    Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+
+                    //정답갯수 올리기
+                    answerCount++;
+
+                    //게임 상황 알림
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setTitle("게임상황");
+
+                    //마지막 문제일경우
+                    if(problemNumber == 5)
+                    {
+                        builder.setMessage("정답입니다.\n(마지막 문제입니다)");
+                        builder.setNegativeButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        counterProblem();
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+
+                    //마지막 문제가 아닐 경우
+                    else {
+                        builder.setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)");
+                    builder.setPositiveButton("예",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+                            });
+                    builder.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    answerCount = 0;
+                                    problemNumber = 0;
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    }
+
+                //틀린경우
+                } else {
+                    //게임 상황 알림
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setTitle("게임상황");
+
+                    //마지막 문제일경우
+                    if (problemNumber == 5) {
+                        builder.setMessage("틀렸습니다.\n(마지막 문제입니다)");
+                        builder.setNegativeButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                    //마지막 문제가 아닌경우
+                    else {
+                        builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (problemNumber != 5) {
+                                            answerCount = 0;
+                                            problemNumber = 0;
+                                            finish();
+                                        }
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
                 }
             }
         });
@@ -124,10 +210,96 @@ public class Excercise1Activity extends AppCompatActivity {
         ex1NoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //정답일경우
                 if (!randomImage1.equals(randomImage2)) {
-                    Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+
+                    //정답갯수 올리기
+                    answerCount++;
+
+                    //게임 상황 알림
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setTitle("게임상황");
+
+                    //마지막 문제일경우
+                    if(problemNumber == 5)
+                    {
+                        builder.setMessage("정답입니다.\n(마지막 문제입니다)");
+                        builder.setNegativeButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        counterProblem();
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+
+                    //마지막 문제가 아닐 경우
+                    else {
+                        builder.setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        answerCount = 0;
+                                        problemNumber = 0;
+                                        finish();
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+
+                    //틀린경우
+                } else {
+                    //게임 상황 알림
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setTitle("게임상황");
+
+                    //마지막 문제일경우
+                    if (problemNumber == 5) {
+                        builder.setMessage("틀렸습니다.\n(마지막 문제입니다)");
+                        builder.setNegativeButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        counterProblem();
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                    //마지막 문제가 아닌경우
+                    else {
+                        builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (problemNumber != 5) {
+                                            answerCount = 0;
+                                            problemNumber = 0;
+                                            finish();
+                                        }
+                                    }
+                                });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
                 }
             }
         });
@@ -138,8 +310,19 @@ public class Excercise1Activity extends AppCompatActivity {
 
         // 최대 5문제까지
         if (problemNumber > 5) {
-            problemNumber = 0;
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+            builder.setTitle("게임결과");
+            builder.setMessage("정답 갯수 : " + answerCount + "개 입니다." );
+            answerCount = 0;
+            builder.setPositiveButton("예",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            problemNumber = 0;
+                            Excercise1Activity.super.onBackPressed();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
 
@@ -261,10 +444,10 @@ public class Excercise1Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        show();
+        dialogShow();
     }
 
-    public void show() {
+    public void dialogShow() {
         //게임 종료 알림
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("종료하기");
@@ -272,6 +455,8 @@ public class Excercise1Activity extends AppCompatActivity {
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        answerCount = 0;
+                        problemNumber = 0;
                         Excercise1Activity.super.onBackPressed();
                     }
                 });
