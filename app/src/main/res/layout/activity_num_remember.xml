@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:gravity="end"
+        android:text="score: 0"
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="숫자를 3초간 잘 기억해 주세요"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/randNumText"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="40dp"
+            android:gravity="center"
+            android:text="123"
+            android:textColor="#000000"
+            android:textSize="60dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

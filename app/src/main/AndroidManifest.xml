@@ -18,6 +18,12 @@
         </activity>
 
         <activity android:name=".Excercise1Activity" />
+        <activity android:name=".Game2Activity" />
+        <activity android:name=".NumRemember" />
+        <activity android:name=".Correct" />
+        <activity android:name=".Incorrect" />
+        <activity android:name=".NumRemeberQuiz" />
+
     </application>
 
 </manifest>
