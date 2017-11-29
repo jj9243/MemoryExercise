@@ -28,7 +28,6 @@ public class Incorrect extends AppCompatActivity {
                 finish();
             }
         };
-        startActivity(new Intent(this, NumRemember.class));
     }
 
     @Override
@@ -39,11 +38,4 @@ public class Incorrect extends AppCompatActivity {
         timer.cancel();
         timer.start();
     }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//    }
 }

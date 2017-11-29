@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class NumRemeberQuiz extends AppCompatActivity {
-
     //변수
     SharedPreferences randNumPref;
     SharedPreferences roundPref;
@@ -77,14 +76,15 @@ public class NumRemeberQuiz extends AppCompatActivity {
                 scoreEditor.commit();
 
                 if(times==3) {
-                    times=1;
-                    SharedPreferences.Editor editor2 = timesPref.edit();
-                    editor2.putInt("times", times);
-                    editor2.commit();
-                    round++;
-                    SharedPreferences.Editor editor3 = roundPref.edit();
-                    editor3.putInt("round", round);
-                    editor3.commit();
+                    if(round!=3){
+                        times=1;
+                        SharedPreferences.Editor editor2 = timesPref.edit();
+                        editor2.putInt("times", times);
+                        editor2.commit();
+                        round++;
+                        SharedPreferences.Editor editor3 = roundPref.edit();
+                        editor3.putInt("round", round);
+                        editor3.commit();}
                 }
             }
             Intent intent = new Intent(getApplicationContext(), Correct.class);
@@ -100,14 +100,16 @@ public class NumRemeberQuiz extends AppCompatActivity {
                 editor.commit();
 
                 if(times==3) {
-                    times=1;
-                    SharedPreferences.Editor editor2 = timesPref.edit();
-                    editor2.putInt("times", times);
-                    editor2.commit();
-                    round++;
-                    SharedPreferences.Editor editor3 = roundPref.edit();
-                    editor3.putInt("round", round);
-                    editor3.commit();
+                    if(round!=3){
+                        times=1;
+                        SharedPreferences.Editor editor2 = timesPref.edit();
+                        editor2.putInt("times", times);
+                        editor2.commit();
+                        round++;
+                        SharedPreferences.Editor editor3 = roundPref.edit();
+                        editor3.putInt("round", round);
+                        editor3.commit();
+                    }
                 }
             }
             Intent intent = new Intent(getApplicationContext(), Incorrect.class);
@@ -129,17 +131,5 @@ public class NumRemeberQuiz extends AppCompatActivity {
         else
             return false;
     }
-    public void setSharedPrefernces (int number, String string){
-        SharedPreferences r = getSharedPreferences(string, MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = randNumPref.edit();
-        editor2.putInt(string, number);
-        editor2.commit();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
 }

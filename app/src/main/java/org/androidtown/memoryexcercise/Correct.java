@@ -39,10 +39,4 @@ public class Correct extends AppCompatActivity {
         timer.start();
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//    }
 }

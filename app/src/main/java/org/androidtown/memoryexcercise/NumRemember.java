@@ -11,6 +11,7 @@ public class NumRemember extends AppCompatActivity {
 
     //클래스
     CountDownTimer timer;
+    CountDownTimer finishTimer;
 
     //텍스트 뷰
     TextView scoreText;
@@ -60,38 +61,51 @@ public class NumRemember extends AppCompatActivity {
         timerText = (TextView) findViewById(R.id.timerText);
 
         if(round==3 && times==3){
-            randNumText.setText("준비된 게임이 끝났습니다.\n 종료합니다");
+            randNumText.setText("준비된 게임이 끝났습니다");
             SharedPreferences.Editor editor3 = roundPref.edit();
             editor3.putInt("round", 1);
             editor3.commit();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            finish();
-        }
 
+            finishTimer = new CountDownTimer(3000,1000) {
+                @Override
+                public void onTick(long l) {
+                }
+
+                @Override
+                public void onFinish() {
+                    finish();
+                }
+            };
+            finishTimer.cancel();
+            finishTimer.start();
+        }
         timerValue = 0;
         timer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
-                timerValue++;
+                if(round==3&&times==3){
+                    timerText.setText("");
+                }
+                else {
+                    timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
+                    timerValue++;
+                }
 //                if(timerValue==3)
 //                    randNumText.setText("");
             }
 
             @Override
             public void onFinish() {
-                timer.cancel();
-                timerValue = 0;
-                Intent intent = new Intent(getApplicationContext(), NumRemeberQuiz.class);
-                startActivity(intent);
-                finish();
+                if(times==3&&round==3);
+                else {
+                    timer.cancel();
+                    timerValue = 0;
+                    Intent intent = new Intent(getApplicationContext(), NumRemeberQuiz.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
-
     }
 
     protected void onStart() {
@@ -101,7 +115,9 @@ public class NumRemember extends AppCompatActivity {
 //        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 //        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         scoreText.setText("Score : " +score);
-        randNumText.setText(randomNumber+"");
+        if(round==3&& times==3);
+        else{
+            randNumText.setText(randomNumber + "");
+        }
     }
-
 }
