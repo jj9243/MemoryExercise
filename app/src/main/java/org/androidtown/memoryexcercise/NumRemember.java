@@ -1,11 +1,15 @@
 package org.androidtown.memoryexcercise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import java.util.Random;
 
 public class NumRemember extends AppCompatActivity {
 
@@ -28,9 +32,11 @@ public class NumRemember extends AppCompatActivity {
 
     int timerValue;
     int randomNumber;
-    int round;
+    static int round = 10;
     int times;
     int score;
+
+    Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +44,23 @@ public class NumRemember extends AppCompatActivity {
         setContentView(R.layout.activity_num_remember);
 
         //클래스
-        roundPref = getSharedPreferences("round",MODE_PRIVATE);
-        round = roundPref.getInt("round",1);
+//        roundPref = getSharedPreferences("round",MODE_PRIVATE);
+//        round = roundPref.getInt("round",1);
+//
+//        timesPref = getSharedPreferences("times",MODE_PRIVATE);
+//        times = timesPref.getInt("times",1);
+//
+//        scorePref = getSharedPreferences("score",MODE_PRIVATE);
+//        score = scorePref.getInt("score",0);
 
-        timesPref = getSharedPreferences("times",MODE_PRIVATE);
-        times = timesPref.getInt("times",1);
+//        RandomNumber randomNum = new RandomNumber();
+//        randomNumber = randomNum.getNumber(round);
+        if(round > 1000000) {
+            round /= 100;
+        }
+        random = new Random();
+        randomNumber = random.nextInt(round);
 
-        scorePref = getSharedPreferences("score",MODE_PRIVATE);
-        score = scorePref.getInt("score",0);
-
-        RandomNumber randomNum = new RandomNumber();
-        randomNumber = randomNum.getNumber(round);
 
         randNumPref = getSharedPreferences("randNum", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = randNumPref.edit();
@@ -60,50 +72,52 @@ public class NumRemember extends AppCompatActivity {
         randNumText = (TextView) findViewById(R.id.randNumText);
         timerText = (TextView) findViewById(R.id.timerText);
 
-        if(round==3 && times==3) {
-            randNumText.setText("준비된 게임이 끝났습니다");
-            SharedPreferences.Editor editor3 = roundPref.edit();
-            editor3.putInt("round", 1);
-            editor3.commit();
-
-            finishTimer = new CountDownTimer(3000,1000) {
-                @Override
-                public void onTick(long l) {
-                }
-
-                @Override
-                public void onFinish() {
-                    finish();
-                }
-            };
-            finishTimer.cancel();
-            finishTimer.start();
-        }
+//        if(round==3 && times==3) {
+//            randNumText.setText("준비된 게임이 끝났습니다");
+//            SharedPreferences.Editor editor3 = roundPref.edit();
+//            editor3.putInt("round", 1);
+//            editor3.commit();
+//
+//            finishTimer = new CountDownTimer(3000,1000) {
+//                @Override
+//                public void onTick(long l) {
+//                }
+//
+//                @Override
+//                public void onFinish() {
+//                    finish();
+//                }
+//            };
+//            finishTimer.cancel();
+//            finishTimer.start();
+//        }
         timerValue = 0;
-        timer = new CountDownTimer(5000, 1000) {
+        timer = new CountDownTimer(4000, 990) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(round==3&&times==3){
-                    timerText.setText("");
-                }
-                else {
+//                if(round==3&&times==3){
+//                    timerText.setText("");
+//                }
+//                else {
                     timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
                     timerValue++;
-                }
+//                }
 //                if(timerValue==3)
 //                    randNumText.setText("");
             }
 
             @Override
             public void onFinish() {
-                if(times==3&&round==3);
-                else {
+//                if(times==3&&round==3);
+//                else {
+
                     timer.cancel();
                     timerValue = 0;
                     Intent intent = new Intent(getApplicationContext(), NumRemeberQuiz.class);
                     startActivity(intent);
                     finish();
-                }
+
+//                }
             }
         };
     }
@@ -112,13 +126,16 @@ public class NumRemember extends AppCompatActivity {
         super.onStart();
         timer.cancel();
         timer.start();
-//        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 //        scoreText.setText("Score : " +score);
-        if(round==3&& times==3);
-        else{
+
+//        if(round==3&& times==3);
+//        else{
+
             randNumText.setText(randomNumber + "");
-        }
+
+//        }
     }
 
     @Override

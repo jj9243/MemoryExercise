@@ -1,9 +1,12 @@
 package org.androidtown.memoryexcercise;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -26,6 +29,9 @@ public class NumRemeberQuiz extends AppCompatActivity {
     //editText
     EditText editText;
 
+    //스테이지 부여
+    static int stageNumber = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +44,14 @@ public class NumRemeberQuiz extends AppCompatActivity {
         randNumPref = getSharedPreferences("randNum", MODE_PRIVATE);
         randomNumber = randNumPref.getInt("randNum",0);
 
-        roundPref = getSharedPreferences("round",MODE_PRIVATE);
-        round = roundPref.getInt("round",1);
-
-        timesPref = getSharedPreferences("times",MODE_PRIVATE);
-        times = timesPref.getInt("times",1);
-
-        scorePref = getSharedPreferences("score",MODE_PRIVATE);
-        score = scorePref.getInt("score",0);
+//        roundPref = getSharedPreferences("round",MODE_PRIVATE);
+//        round = roundPref.getInt("round",1);
+//
+//        timesPref = getSharedPreferences("times",MODE_PRIVATE);
+//        times = timesPref.getInt("times",1);
+//
+//        scorePref = getSharedPreferences("score",MODE_PRIVATE);
+//        score = scorePref.getInt("score",0);
 
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -58,63 +64,120 @@ public class NumRemeberQuiz extends AppCompatActivity {
             }
         });
 
-
+        //스테이지
+        stageNumber++;
     }
 
     public void checkNumber(int number){
         if(isCorrect(number)){//맞았을 때
-            if(times<3) {
-                times++;
+//            if(times<3) {
+//                times++;
+//
+//                SharedPreferences.Editor editor = timesPref.edit();
+//                editor.putInt("times", times);
+//                editor.commit();
+//
+//                score++;
+//                SharedPreferences.Editor scoreEditor = scorePref.edit();
+//                scoreEditor.putInt("score", score);
+//                scoreEditor.commit();
+//
+//                if(times==3) {
+//                    if(round!=3){
+//                        times=1;
+//                        SharedPreferences.Editor editor2 = timesPref.edit();
+//                        editor2.putInt("times", times);
+//                        editor2.commit();
+//                        round++;
+//                        SharedPreferences.Editor editor3 = roundPref.edit();
+//                        editor3.putInt("round", round);
+//                        editor3.commit();}
+//                }
+//            }
+//            Intent intent = new Intent(getApplicationContext(), Correct.class);
+//            startActivity(intent);
+//            finish();
 
-                SharedPreferences.Editor editor = timesPref.edit();
-                editor.putInt("times", times);
-                editor.commit();
+            //난이도 상승
 
-                score++;
-                SharedPreferences.Editor scoreEditor = scorePref.edit();
-                scoreEditor.putInt("score", score);
-                scoreEditor.commit();
+            NumRemember.round *= 10;
 
-                if(times==3) {
-                    if(round!=3){
-                        times=1;
-                        SharedPreferences.Editor editor2 = timesPref.edit();
-                        editor2.putInt("times", times);
-                        editor2.commit();
-                        round++;
-                        SharedPreferences.Editor editor3 = roundPref.edit();
-                        editor3.putInt("round", round);
-                        editor3.commit();}
-                }
-            }
-            Intent intent = new Intent(getApplicationContext(), Correct.class);
-            startActivity(intent);
-            finish();
+            //게임 종료 알림
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
+            builder.setTitle("다음 스테이지 넘어가기");
+            builder.setMessage("Stage" + stageNumber + " 성공\n게임을 계속 하시겠습니까?\n");
+            builder.setPositiveButton("예",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getApplicationContext(), NumRemember.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+            builder.setNegativeButton("아니오",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            stageNumber = 0;
+                            InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                            finish();
+                        }
+                    });
+            builder.show();
         }
         else{//틀렸을 때
-            if(times<3) {
-                times++;
+//            if(times<3) {
+//                times++;
+//
+//                SharedPreferences.Editor editor = timesPref.edit();
+//                editor.putInt("times", times);
+//                editor.commit();
+//
+//                if(times==3) {
+//                    if(round!=3){
+//                        times=1;
+//                        SharedPreferences.Editor editor2 = timesPref.edit();
+//                        editor2.putInt("times", times);
+//                        editor2.commit();
+//                        round++;
+//                        SharedPreferences.Editor editor3 = roundPref.edit();
+//                        editor3.putInt("round", round);
+//                        editor3.commit();
+//                    }
+//                }
+//            }
+//            Intent intent = new Intent(getApplicationContext(), Incorrect.class);
+//            startActivity(intent);
+//            finish();
 
-                SharedPreferences.Editor editor = timesPref.edit();
-                editor.putInt("times", times);
-                editor.commit();
+            // 난이도 하강
+            NumRemember.round /= 10;
 
-                if(times==3) {
-                    if(round!=3){
-                        times=1;
-                        SharedPreferences.Editor editor2 = timesPref.edit();
-                        editor2.putInt("times", times);
-                        editor2.commit();
-                        round++;
-                        SharedPreferences.Editor editor3 = roundPref.edit();
-                        editor3.putInt("round", round);
-                        editor3.commit();
-                    }
-                }
-            }
-            Intent intent = new Intent(getApplicationContext(), Incorrect.class);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
+            builder.setTitle("다음 스테이지 넘어가기");
+            builder.setMessage("Stage" + stageNumber + " 실패\n게임을 계속 하시겠습니까?\n");
+            builder.setPositiveButton("예",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getApplicationContext(), NumRemember.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+            builder.setNegativeButton("아니오",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            stageNumber = 0;
+                            InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                            finish();
+                        }
+                    });
+            builder.show();
         }
     }
 
@@ -132,4 +195,31 @@ public class NumRemeberQuiz extends AppCompatActivity {
             return false;
     }
 
+    @Override
+    public void onBackPressed() {
+
+        dialogShow();
+    }
+
+    public void dialogShow() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setCancelable(false);
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        NumRemeberQuiz.super.onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        immhide.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                    }
+                });
+        builder.show();
+    }
 }
