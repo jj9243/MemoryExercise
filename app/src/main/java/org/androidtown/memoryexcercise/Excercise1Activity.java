@@ -130,7 +130,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //마지막 문제일경우
                     if(problemNumber == 5)
                     {
-                        builder.setMessage("정답입니다.\n(마지막 문제입니다)");
+                        builder.setMessage("맞았습니다.\n(마지막 문제입니다)");
                         builder.setNegativeButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -143,7 +143,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //마지막 문제가 아닐 경우
                     else {
-                        builder.setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
                     builder.setPositiveButton("예",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -231,7 +231,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //마지막 문제일경우
                     if(problemNumber == 5)
                     {
-                        builder.setMessage("정답입니다.\n(마지막 문제입니다)");
+                        builder.setMessage("맞았습니다.\n(마지막 문제입니다)");
                         builder.setNegativeButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +244,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //마지막 문제가 아닐 경우
                     else {
-                        builder.setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {

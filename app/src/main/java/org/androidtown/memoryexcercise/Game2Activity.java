@@ -1,10 +1,12 @@
 package org.androidtown.memoryexcercise;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,7 +27,9 @@ public class Game2Activity extends AppCompatActivity {
     boolean[] ansCheck = new boolean[4];
     int ansCnt = 0;
     int timerVal;
-
+    int timerCount = 4;
+    int playChance = 2;
+    static int stageNumber = 0;
     CountDownTimer timer;
 
     @Override
@@ -48,8 +52,11 @@ public class Game2Activity extends AppCompatActivity {
         textView2 = (TextView) findViewById(R.id.textView2);
         textView3 = (TextView) findViewById(R.id.textView3);
         textView4 = (TextView) findViewById(R.id.textView4);
-        textView5 = (TextView) findViewById(R.id.textView5);
+        //textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
+
+        //문제 수증가
+        stageNumber++;
 
         timerVal = 0;
         timer = new CountDownTimer(5000, 990) {
@@ -72,18 +79,18 @@ public class Game2Activity extends AppCompatActivity {
         super.onStart();
 
         // 서로 다른 random number 4개(0 ~ 8)를 찾는다.
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             int tmp = random.nextInt(9);
             int cnt = 0;
-            for(int j = 0; j < i; j++) {
-                if(tmp != randNum[j]) cnt++;
+            for (int j = 0; j < i; j++) {
+                if (tmp != randNum[j]) cnt++;
             }
 
-            if(cnt == i) randNum[i] = tmp;
+            if (cnt == i) randNum[i] = tmp;
             else i--;
         }
 
-        if(task != null && task.getStatus() == AsyncTask.Status.RUNNING)
+        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING)
             task.cancel(true);
 
         task = new BackgroundTask();
@@ -99,17 +106,18 @@ public class Game2Activity extends AppCompatActivity {
 
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {
         boolean flag = true;
+
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
-        protected Integer doInBackground(Integer ... values) {
+        protected Integer doInBackground(Integer... values) {
             // 4개의 버튼을 4번 깜박이기
-            for(int i = 0; i < 8; i++) { // n번 깜박이기 위해서 n*2번 post()호출
-                if(isCancelled()) break; //*** 이게 없으면 종료에 시간이 걸리므로 back pressed 후 다시 시작할 때 느린 시작 현상
+            for (int i = 0; i < 8; i++) { // n번 깜박이기 위해서 n*2번 post()호출
+                if (isCancelled()) break; //*** 이게 없으면 종료에 시간이 걸리므로 back pressed 후 다시 시작할 때 느린 시작 현상
                 try {
                     Thread.sleep(1000); // 1초 간격으로
-                } catch(InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 //깜박이기
@@ -119,32 +127,35 @@ public class Game2Activity extends AppCompatActivity {
             //1초 쉬었다가 onPostExecute()로 넘어간다.
             try {
                 Thread.sleep(1000);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             return values[0];
         }
 
-        protected void onProgressUpdate(Integer ... values) {
+        protected void onProgressUpdate(Integer... values) {
             if (flag) { // 4개의 버튼을 빨간색으로 바꿔준다.
                 flag = false;
                 for (int i = 0; i < 4; i++) {
                     int idx = randNum[i];
                     buttonArr[idx].setImageResource(R.drawable.oval2);
                 }
-            }
-            else { // 4개의 버튼을 원래의 색으로 바꿔준다.
+            } else { // 4개의 버튼을 원래의 색으로 바꿔준다.
                 flag = true;
                 for (int i = 0; i < 4; i++) {
                     int idx = randNum[i];
                     buttonArr[idx].setImageResource(R.drawable.oval1);
                 }
+                timerCount--;
+                if (timerCount != 0)
+                    textView2.setText(timerCount + "번 깜박인 후\n문제가 나옵니다.");
+
             }
         }
 
         protected void onPostExecute(Integer result) {
-            for(int i = 0; i < 9; i++) {
+            for (int i = 0; i < 9; i++) {
                 buttonArr[i].setVisibility(View.GONE);
             }
             textView1.setVisibility(View.GONE);
@@ -162,87 +173,102 @@ public class Game2Activity extends AppCompatActivity {
     }
 
     void MemoryTest() {
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             buttonArr[i].setVisibility(View.VISIBLE);
         }
         textView1.setVisibility(View.VISIBLE);
-        textView2.setVisibility(View.VISIBLE);
         textView3.setVisibility(View.GONE);
-
         textView1.setText("깜박이를 찾아주세요");
-        textView2.setText("찾은 깜박이 수");
 
         // 찾은 깜박이 수 표시
         textView4.setVisibility(View.VISIBLE);
-        textView5.setVisibility(View.VISIBLE);
         textView6.setVisibility(View.VISIBLE);
 
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             ansCheck[i] = false;
         }
 
         ansCnt = 0;
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             final int buttonIdx = i;
             buttonArr[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     boolean isAnswer = false;
                     System.out.println("test : 클릭하면 여기 들어와 : " + isAnswer);
-                    for(int j = 0; j < 4; j++) {
-                        if(buttonIdx == randNum[j]) {
-                            if(!ansCheck[j]) {
+                    for (int j = 0; j < 4; j++) {
+                        if (buttonIdx == randNum[j]) {
+                            if (!ansCheck[j]) {
                                 ansCheck[j] = true;
                                 buttonArr[buttonIdx].setImageResource(R.drawable.oval2);
                                 isAnswer = true;
                                 ansCnt++;
-                                textView4.setText("" + ansCnt);
-                                textView1.setText("Good!");
+                                textView4.setText("찾은 깜박이(" + ansCnt + "/4)");
                                 break;
-                            }
-                            else { // 이미 고른 답을 또 눌렀다면
+                            } else { // 이미 고른 답을 또 눌렀다면
                                 isAnswer = true;
                             }
                         }
                     }
                     System.out.println("test : " + isAnswer);
-                    if(!isAnswer) { // 고른 것이 답이 아니라면
-                        textView1.setText("Wrong!");
+                    if (!isAnswer) { // 고른 것이 답이 아니라면
+                        playChance--;
+                        startVibrate();
+                        if (playChance > 0) {
+                            textView6.setText("(남은 기회는 " + playChance + "번입니다)");
+                        } else if (playChance == 0)
+                            textView6.setText("(마지막 기회 입니다)");
+                        else
+                        {
+                            //게임 종료 알림
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Game2Activity.this);
+                            builder.setCancelable(false);
+                            builder.setTitle("게임상황");
+                            builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
+                            builder.setPositiveButton("예",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(getApplicationContext(), Game2Activity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            builder.setNegativeButton("아니오",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            stageNumber = 0;
+                                            finish();
+                                        }
+                                    });
+                            builder.show();
+                        }
+
                         System.out.println("test : 여기 들어오나?");
                     }
 
-                    if(ansCnt == 4) { // 4개의 깜박이를 모두 찾은 경우, -> 다음 게임 시작 or 홈화면 선택.
-                        textView1.setText("Congratulation!");
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Game2Activity.this);
+                    if (ansCnt == 4) { // 4개의 깜박이를 모두 찾은 경우, -> 다음 게임 시작 or 홈화면 선택.
+                        //textView1.setText("Congratulation!");
 
-                        // 다이얼로그 제목
-                        //alertDialogBuilder.setTitle("Congratulation!");
-
-                        // 내용
-                        alertDialogBuilder
-                                .setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)")
-                                .setCancelable(false)
-                                .setPositiveButton("예",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                onStop();
-                                                // 게임 다시 시작
-                                                Intent intent = new Intent(getApplicationContext(), Game2Activity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                )
-                                .setNegativeButton("아니요",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                // 게임 종료
-                                                finish();
-                                            }
-                                        }
-                                );
-
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+                        //게임 종료 알림
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Game2Activity.this);
+                        builder.setCancelable(false);
+                        builder.setTitle("게임상황");
+                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Game2Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        stageNumber = 0;
+                                        finish();
+                                    }
+                                });
+                        builder.show();
 
                     }
                 }
@@ -264,6 +290,7 @@ public class Game2Activity extends AppCompatActivity {
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        stageNumber = 0;
                         Game2Activity.super.onBackPressed();
                     }
                 });
@@ -273,6 +300,12 @@ public class Game2Activity extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    public void startVibrate()
+    {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
     }
 
 }

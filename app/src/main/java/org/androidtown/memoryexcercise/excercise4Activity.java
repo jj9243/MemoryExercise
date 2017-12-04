@@ -168,7 +168,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 0) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit1Answer.setImageResource(R.drawable.answer);
 
@@ -178,7 +178,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit1Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -197,7 +197,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 1) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit2Answer.setImageResource(R.drawable.answer);
 
@@ -207,7 +207,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit2Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -226,7 +226,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 2) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit3Answer.setImageResource(R.drawable.answer);
 
@@ -236,7 +236,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit3Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -255,7 +255,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 3) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                    //    Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit4Answer.setImageResource(R.drawable.answer);
 
@@ -265,7 +265,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit4Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -285,7 +285,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 4) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit5Answer.setImageResource(R.drawable.answer);
 
@@ -295,7 +295,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit5Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -316,7 +316,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 5) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit6Answer.setImageResource(R.drawable.answer);
 
@@ -327,7 +327,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit6Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -346,7 +346,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 6) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit7Answer.setImageResource(R.drawable.answer);
 
@@ -356,7 +356,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit7Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -375,7 +375,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 7) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit8Answer.setImageResource(R.drawable.answer);
 
@@ -385,7 +385,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit8Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -405,7 +405,7 @@ public class excercise4Activity extends AppCompatActivity {
                 int found = 0;
                 for (int i = 0; i < 2; i++) {
                     if (answer[i] == 8) {
-                        Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_LONG).show();
                         found = 1;
                         fruit9Answer.setImageResource(R.drawable.answer);
 
@@ -416,7 +416,7 @@ public class excercise4Activity extends AppCompatActivity {
                     }
                 }
                 if (found == 0) {
-                    Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_LONG).show();
                     fruit9Answer.setImageResource(R.drawable.fail);
                     chanceFail();
                 }
@@ -509,8 +509,8 @@ public class excercise4Activity extends AppCompatActivity {
             //게임 종료 알림
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
-            builder.setTitle("다음 스테이지 넘어가기");
-            builder.setMessage("Stage" + stageNumber + " 성공\n게임을 계속 하시겠습니까?\n");
+            builder.setTitle("게임상황");
+            builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
             builder.setPositiveButton("예",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -531,8 +531,8 @@ public class excercise4Activity extends AppCompatActivity {
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
-            builder.setTitle("다음 스테이지 넘어가기");
-            builder.setMessage("Stage" + stageNumber + " 실패\n게임을 계속 하시겠습니까?\n");
+            builder.setTitle("게임상황");
+            builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
             builder.setPositiveButton("예",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
