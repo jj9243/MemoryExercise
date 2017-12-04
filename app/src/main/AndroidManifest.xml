@@ -26,6 +26,8 @@
         <activity android:name=".Incorrect" />
         <activity android:name=".NumRemeberQuiz" />
         <activity android:name=".excercise4Activity" />
+        <activity android:name=".Game5Activity" />
+        <activity android:name=".CheckAnswer" />
 
     </application>
 

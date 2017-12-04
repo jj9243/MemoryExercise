@@ -87,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        enterEx4Btn.setOnClickListener(new View.OnClickListener() {
+        enterEx5Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), excercise4Activity.class);
+                Intent intent = new Intent(getApplicationContext(), Game5Activity.class);
                 startActivity(intent);
             }
         });
