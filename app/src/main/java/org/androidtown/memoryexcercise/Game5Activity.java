@@ -1,9 +1,13 @@
 package org.androidtown.memoryexcercise;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +26,7 @@ public class Game5Activity extends AppCompatActivity {
     Random random;
     int[] randNum;
     String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    String[] number = {"①","②","③","④"};
+    String[] number = {"①", "②", "③", "④"};
     String ans = "";
 
     int timerVal;
@@ -39,7 +43,7 @@ public class Game5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_game5);
 
         gameExplain = (TextView) findViewById(R.id.gameExplain);
-        textQuestion = (TextView)findViewById(R.id.textQuestion);
+        textQuestion = (TextView) findViewById(R.id.textQuestion);
         ansGrid = (GridLayout) findViewById(R.id.ansGrid);
         text = new TextView[3];
         text[0] = (TextView) findViewById(R.id.text0);
@@ -79,12 +83,12 @@ public class Game5Activity extends AppCompatActivity {
         System.out.println("test get in onStart");
         // 3개의 알파벳을 random으로 고른다. 0 ~ 25
 
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             randNum[i] = random.nextInt(26);
             ans += alphabet[randNum[i]];
         }
 
-        if(task != null && task.getStatus() == AsyncTask.Status.RUNNING)
+        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING)
             task.cancel(true);
 
         System.out.println("test end in onStart");
@@ -94,6 +98,7 @@ public class Game5Activity extends AppCompatActivity {
 
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {
         boolean flag = true;
+
         protected void onPreExecute() {
             super.onPreExecute();
         }
@@ -101,19 +106,19 @@ public class Game5Activity extends AppCompatActivity {
         protected Integer doInBackground(Integer... values) {
             System.out.println("test get in doInBackground");
             // 3개의 알파벳을 차례로 깜박이며 보여주기.
-            for(int i = 0; i < 3; i++) {
-                if(isCancelled()) break; //*** 이게 없으면 종료에 시간이 걸리므로 back pressed 후 다시 시작할 때 느린 시작 현상
+            for (int i = 0; i < 3; i++) {
+                if (isCancelled()) break; //*** 이게 없으면 종료에 시간이 걸리므로 back pressed 후 다시 시작할 때 느린 시작 현상
 //                try {
 //                    Thread.sleep(1000); // 1초 간격으로
 //                } catch(InterruptedException e) {
 //                    e.printStackTrace();
 //                }
 
-                for(int j = 0; j < 6; j++) {
-                    if(isCancelled()) break; //***
+                for (int j = 0; j < 6; j++) {
+                    if (isCancelled()) break; //***
                     try {
                         Thread.sleep(1000); // 1초 간격으로
-                    } catch(InterruptedException e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     // 보여주기
@@ -124,7 +129,7 @@ public class Game5Activity extends AppCompatActivity {
             // 1초 쉬었다가 onPostExecute()로 넘어간다.
             try {
                 Thread.sleep(1000);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -133,11 +138,10 @@ public class Game5Activity extends AppCompatActivity {
 
         protected void onProgressUpdate(Integer... values) {
             int idx = values[0];
-            if(flag) {
+            if (flag) {
                 flag = false;
                 text[idx].setText(alphabet[randNum[idx]]);
-            }
-            else {
+            } else {
                 flag = true;
                 text[idx].setText("  ");
             }
@@ -145,7 +149,7 @@ public class Game5Activity extends AppCompatActivity {
 
         protected void onPostExecute(Integer result) {
             gameExplain.setVisibility(View.GONE);
-            for(int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++) {
                 text[i].setVisibility(View.GONE);
             }
 
@@ -169,46 +173,88 @@ public class Game5Activity extends AppCompatActivity {
 
         String[] candidate = new String[4];
         // 먼저 정답이 아닌 4개의 서로 다른(정답과도 다른) 후보(선택지)를 만든다.
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             String tmp = "";
-            for(int j = 0; j < 3; j++) { // 무작위로 알파벳 3개를 골라서 만든다.
+            for (int j = 0; j < 3; j++) { // 무작위로 알파벳 3개를 골라서 만든다.
                 tmp += alphabet[random.nextInt(26)];
             }
 
             int cnt = 0;
-            for(int j = 0; j < i; j++) { // 정답 및 앞의 선택지들과 다른지 체크
-                if(!tmp.equals(ans) && !tmp.equals(candidate[j])) cnt++;
+            for (int j = 0; j < i; j++) { // 정답 및 앞의 선택지들과 다른지 체크
+                if (!tmp.equals(ans) && !tmp.equals(candidate[j])) cnt++;
             }
 
-            if(cnt == i) candidate[i] = number[i] + " " + tmp; //모두 다르면 확정
+            if (cnt == i) candidate[i] = number[i] + " " + tmp; //모두 다르면 확정
             else i--; //아닐 경우 다시...
         }
         // 그리고 4개의 선택지 중 하나의 선택지를 랜덤하게 골라서 정답을 넣는다.
         int ansIdx = random.nextInt(4);
-        candidate[ansIdx] = number[ansIdx]+ " " +ans;
+        candidate[ansIdx] = number[ansIdx] + " " + ans;
 
-        for(int i = 0; i < 4; i++) { // 4개의 선택지 setting.
+        for (int i = 0; i < 4; i++) { // 4개의 선택지 setting.
             ansBtn[i].setText(candidate[i]);
         }
 
         ansGrid.setVisibility(View.VISIBLE);
         textQuestion.setVisibility(View.VISIBLE);
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             final int idx = i;
             final int aIdx = ansIdx;
             ansBtn[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    if(idx == aIdx) { // 정답을 선택
-                        Intent intent = new Intent(getApplicationContext(), CheckAnswer.class);
-                        intent.putExtra("isCorrect", true);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else { // 오답을 선택
-                        Intent intent = new Intent(getApplicationContext(), CheckAnswer.class);
-                        intent.putExtra("isCorrect", false);
-                        startActivity(intent);
-                        finish();
+                    if (idx == aIdx) { // 정답을 선택
+                        //게임 종료 알림
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Game5Activity.this);
+                        builder.setCancelable(false);
+                        builder.setTitle("게임상황");
+                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Game5Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+                                            System.out.println("test on back pressed");
+                                            task.cancel(true);
+                                            System.out.println("test on back pressed 2");
+                                        }
+                                        finish();
+                                    }
+                                });
+                        builder.show();
+                    } else { // 오답을 선택
+                        startVibrate();
+                        //게임 종료 알림
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Game5Activity.this);
+                        builder.setCancelable(false);
+                        builder.setTitle("게임상황");
+                        builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
+                        builder.setPositiveButton("예",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), Game5Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("아니오",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+                                            System.out.println("test on back pressed");
+                                            task.cancel(true);
+                                            System.out.println("test on back pressed 2");
+                                        }
+                                        finish();
+                                    }
+                                });
+                        builder.show();
                     }
                 }
             });
@@ -219,7 +265,7 @@ public class Game5Activity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        if(task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
             System.out.println("test on back pressed");
             task.cancel(true);
             System.out.println("test on back pressed 2");
@@ -228,13 +274,38 @@ public class Game5Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
-        if(task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
-            System.out.println("test on back pressed");
-            task.cancel(true);
-            System.out.println("test on back pressed 2");
-        }
-        finish();
+        dialogShow();
     }
+
+    public void dialogShow() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setCancelable(false);
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+                            System.out.println("test on back pressed");
+                            task.cancel(true);
+                            System.out.println("test on back pressed 2");
+                        }
+                        Game5Activity.super.onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
+    }
+
+    public void startVibrate() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
+    }
+
 }
