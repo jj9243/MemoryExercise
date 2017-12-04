@@ -41,5 +41,15 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/enterEx4Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="4. 과일 기억하기"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 </RelativeLayout>

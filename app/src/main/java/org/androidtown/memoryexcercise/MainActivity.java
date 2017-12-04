@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     //버튼 UI
-    Button enterEx1Btn, enterEx2Btn, enterEx3Btn;
+    Button enterEx1Btn, enterEx2Btn, enterEx3Btn, enterEx4Btn;
 
     //클래스
     NumRemember numRemember;
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         enterEx1Btn = (Button) findViewById(R.id.enterEx1Btn);
         enterEx2Btn = (Button) findViewById(R.id.enterEx2Btn);
         enterEx3Btn = (Button) findViewById(R.id.enterEx3Btn);
+        enterEx4Btn = (Button)findViewById(R.id.enterEx4Btn);
 
         //버튼을 클릭할 경우
         enterEx1Btn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), NumRemember.class);
                 startActivity(intent);
-                finish();
+            }
+        });
+        enterEx4Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), excercise4Activity.class);
+                startActivity(intent);
             }
         });
     }
