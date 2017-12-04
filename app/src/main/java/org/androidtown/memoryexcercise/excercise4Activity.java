@@ -508,6 +508,7 @@ public class excercise4Activity extends AppCompatActivity {
         if(i == 1) {
             //게임 종료 알림
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
             builder.setTitle("다음 스테이지 넘어가기");
             builder.setMessage("Stage" + stageNumber + " 성공\n게임을 계속 하시겠습니까?\n");
             builder.setPositiveButton("예",
@@ -529,6 +530,7 @@ public class excercise4Activity extends AppCompatActivity {
         }
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
             builder.setTitle("다음 스테이지 넘어가기");
             builder.setMessage("Stage" + stageNumber + " 실패\n게임을 계속 하시겠습니까?\n");
             builder.setPositiveButton("예",
@@ -549,6 +551,32 @@ public class excercise4Activity extends AppCompatActivity {
             builder.show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        dialogShow();
+    }
+
+    public void dialogShow() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setCancelable(false);
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        excercise4Activity.super.onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
+    }
+
 }
 
 

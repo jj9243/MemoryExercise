@@ -1,9 +1,11 @@
 package org.androidtown.memoryexcercise;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -64,7 +66,7 @@ public class Excercise1Activity extends AppCompatActivity {
         setContentView(R.layout.excercise1);
 
         //문제 수 초기화
-        counterProblem();
+        //counterProblem();
 
         //UI 가져오기
         ex1YesBtn = (Button) findViewById(R.id.ex1YesBtn);
@@ -78,7 +80,7 @@ public class Excercise1Activity extends AppCompatActivity {
         ex1Image = (ImageView) findViewById(R.id.ex1Image);
         answerLinear = (LinearLayout) findViewById(R.id.answerLinear);
 
-        ex1Question1.setText(problemNumber + ". " + "사진을 기억하세요");
+        //ex1Question1.setText(problemNumber + ". " + "사진을 기억하세요");
 
         //첫 랜덤 초기화
         initRandom();
@@ -122,6 +124,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setCancelable(false);
                     builder.setTitle("게임상황");
 
                     //마지막 문제일경우
@@ -165,10 +168,12 @@ public class Excercise1Activity extends AppCompatActivity {
                 } else {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setCancelable(false);
                     builder.setTitle("게임상황");
 
                     //마지막 문제일경우
                     if (problemNumber == 5) {
+                        startVibrate();
                         builder.setMessage("틀렸습니다.\n(마지막 문제입니다)");
                         builder.setNegativeButton("예",
                                 new DialogInterface.OnClickListener() {
@@ -181,6 +186,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     }
                     //마지막 문제가 아닌경우
                     else {
+                        startVibrate();
                         builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
@@ -219,6 +225,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setCancelable(false);
                     builder.setTitle("게임상황");
 
                     //마지막 문제일경우
@@ -262,10 +269,12 @@ public class Excercise1Activity extends AppCompatActivity {
                 } else {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+                    builder.setCancelable(false);
                     builder.setTitle("게임상황");
 
                     //마지막 문제일경우
                     if (problemNumber == 5) {
+                        startVibrate();
                         builder.setMessage("틀렸습니다.\n(마지막 문제입니다)");
                         builder.setNegativeButton("예",
                                 new DialogInterface.OnClickListener() {
@@ -278,6 +287,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     }
                     //마지막 문제가 아닌경우
                     else {
+                        startVibrate();
                         builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
                         builder.setPositiveButton("예",
                                 new DialogInterface.OnClickListener() {
@@ -311,6 +321,7 @@ public class Excercise1Activity extends AppCompatActivity {
         // 최대 5문제까지
         if (problemNumber > 5) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
+            builder.setCancelable(false);
             builder.setTitle("게임결과");
             builder.setMessage("정답 갯수 : " + answerCount + "개 입니다." );
             answerCount = 0;
@@ -450,6 +461,7 @@ public class Excercise1Activity extends AppCompatActivity {
     public void dialogShow() {
         //게임 종료 알림
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setTitle("종료하기");
         builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
         builder.setPositiveButton("예",
@@ -466,5 +478,11 @@ public class Excercise1Activity extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    public void startVibrate()
+    {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
     }
 }
