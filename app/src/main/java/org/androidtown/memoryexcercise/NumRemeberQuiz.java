@@ -105,8 +105,8 @@ public class NumRemeberQuiz extends AppCompatActivity {
             //게임 종료 알림
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
-            builder.setTitle("다음 스테이지 넘어가기");
-            builder.setMessage("Stage" + stageNumber + " 성공\n게임을 계속 하시겠습니까?\n");
+            builder.setTitle("게임상황");
+            builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)\n");
             builder.setPositiveButton("예",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -157,8 +157,8 @@ public class NumRemeberQuiz extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
-            builder.setTitle("다음 스테이지 넘어가기");
-            builder.setMessage("Stage" + stageNumber + " 실패\n게임을 계속 하시겠습니까?\n");
+            builder.setTitle("게임상황");
+            builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)\n");
             builder.setPositiveButton("예",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

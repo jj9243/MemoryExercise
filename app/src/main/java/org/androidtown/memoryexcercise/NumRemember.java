@@ -1,10 +1,12 @@
 package org.androidtown.memoryexcercise;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -140,13 +142,36 @@ public class NumRemember extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
-        if(timer != null)
-            timer.cancel();
-        if(finishTimer != null)
-            finishTimer.cancel();
-        
-        finish();
+        dialogShow();
+    }
+
+    public void dialogShow() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setCancelable(false);
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        NumRemember.super.onBackPressed();
+
+                        if(timer != null)
+                            timer.cancel();
+                        if(finishTimer != null)
+                            finishTimer.cancel();
+
+                        finish();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        immhide.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                    }
+                });
+        builder.show();
     }
 }
