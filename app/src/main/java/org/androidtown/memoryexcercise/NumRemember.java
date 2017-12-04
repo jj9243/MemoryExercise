@@ -23,6 +23,7 @@ public class NumRemember extends AppCompatActivity {
     TextView scoreText;
     TextView randNumText;
     TextView timerText;
+    TextView countDown;
 
 
     //변수
@@ -73,6 +74,7 @@ public class NumRemember extends AppCompatActivity {
 //        scoreText = (TextView) findViewById(R.id.scoreText);
         randNumText = (TextView) findViewById(R.id.randNumText);
         timerText = (TextView) findViewById(R.id.timerText);
+        countDown = (TextView) findViewById(R.id.countdown);
 
 //        if(round==3 && times==3) {
 //            randNumText.setText("준비된 게임이 끝났습니다");
@@ -101,7 +103,8 @@ public class NumRemember extends AppCompatActivity {
 //                    timerText.setText("");
 //                }
 //                else {
-                    timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
+//                    timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
+                    countDown.setText((4 - timerValue) + "초후에 \n문제가 나옵니다.");
                     timerValue++;
 //                }
 //                if(timerValue==3)
