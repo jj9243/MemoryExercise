@@ -87,7 +87,9 @@ public class excercise4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_excercise4);
+
 
         //UI 가져오기
         ex4Question1 = (TextView) findViewById(R.id.ex4Question1);

@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
 
     //버튼 UI
+
     ImageButton enterEx1Btn, enterEx2Btn, enterEx3Btn, enterEx4Btn, enterEx5Btn;
 
     //클래스
@@ -47,11 +48,13 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
 
         //버튼 UI 선언
+
         enterEx1Btn = (ImageButton) findViewById(R.id.prevPictureRemember);
         enterEx2Btn = (ImageButton) findViewById(R.id.blinkingBallRemember);
         enterEx3Btn = (ImageButton) findViewById(R.id.lottoNumRemember);
         enterEx4Btn = (ImageButton) findViewById(R.id.fruitRemember);
         enterEx5Btn = (ImageButton) findViewById(R.id.wordRemember);
+
 
         //버튼을 클릭할 경우
         enterEx1Btn.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), NumRemember.class);
                 startActivity(intent);
-                finish();
+            }
+        });
+        enterEx4Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), excercise4Activity.class);
+                startActivity(intent);
             }
         });
         enterEx4Btn.setOnClickListener(new View.OnClickListener() {
