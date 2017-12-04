@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class Game5Activity extends AppCompatActivity {
 
-    TextView gameExplain, textCenter, textQuestion;
+    TextView gameExplain, textCenter, textQuestion, noti;
     EditText underLine;
     GridLayout ansGrid;
     TextView[] text;
@@ -51,6 +51,7 @@ public class Game5Activity extends AppCompatActivity {
         text[2] = (TextView) findViewById(R.id.text2);
 
         textCenter = (TextView) findViewById(R.id.textCenter);
+        noti = (TextView)findViewById(R.id.noti);
 
         random = new Random();
         randNum = new int[3];
@@ -149,6 +150,7 @@ public class Game5Activity extends AppCompatActivity {
 
         protected void onPostExecute(Integer result) {
             gameExplain.setVisibility(View.GONE);
+            noti.setVisibility(View.GONE);
             for (int i = 0; i < 3; i++) {
                 text[i].setVisibility(View.GONE);
             }
