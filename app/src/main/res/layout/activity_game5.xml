@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.memorade.org.memoryex5.Game5Activity">
+    tools:context="org.androidtown.memoryexcercise.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"

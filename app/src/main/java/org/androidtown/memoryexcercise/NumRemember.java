@@ -56,11 +56,11 @@ public class NumRemember extends AppCompatActivity {
         editor2.commit();
 
         //텍스트 뷰
-        scoreText = (TextView) findViewById(R.id.scoreText);
+//        scoreText = (TextView) findViewById(R.id.scoreText);
         randNumText = (TextView) findViewById(R.id.randNumText);
         timerText = (TextView) findViewById(R.id.timerText);
 
-        if(round==3 && times==3){
+        if(round==3 && times==3) {
             randNumText.setText("준비된 게임이 끝났습니다");
             SharedPreferences.Editor editor3 = roundPref.edit();
             editor3.putInt("round", 1);
@@ -114,10 +114,22 @@ public class NumRemember extends AppCompatActivity {
         timer.start();
 //        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 //        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-        scoreText.setText("Score : " +score);
+//        scoreText.setText("Score : " +score);
         if(round==3&& times==3);
         else{
             randNumText.setText(randomNumber + "");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(timer != null)
+            timer.cancel();
+        if(finishTimer != null)
+            finishTimer.cancel();
+        
+        finish();
     }
 }

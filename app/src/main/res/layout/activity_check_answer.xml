@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="project.memorade.org.memoryex5.CheckAnswer">
+    tools:context="org.androidtown.memoryexcercise.MainActivity">
 
     <ImageView
         android:id="@+id/correctImg"
