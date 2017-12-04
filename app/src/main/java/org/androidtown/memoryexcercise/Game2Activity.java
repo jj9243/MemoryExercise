@@ -219,9 +219,9 @@ public class Game2Activity extends AppCompatActivity {
 
                         // 내용
                         alertDialogBuilder
-                                .setMessage("Congratulation!")
+                                .setMessage("정답입니다.\n(다음문제로 넘어가시겠습니까?)")
                                 .setCancelable(false)
-                                .setPositiveButton("Continue",
+                                .setPositiveButton("예",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 onStop();
@@ -232,7 +232,7 @@ public class Game2Activity extends AppCompatActivity {
                                             }
                                         }
                                 )
-                                .setNegativeButton("Go Home",
+                                .setNegativeButton("아니요",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 // 게임 종료
@@ -249,4 +249,30 @@ public class Game2Activity extends AppCompatActivity {
             });
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        dialogShow();
+    }
+
+    public void dialogShow() {
+        //게임 종료 알림
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("종료하기");
+        builder.setCancelable(false);
+        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
+        builder.setPositiveButton("예",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Game2Activity.super.onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
+    }
+
 }
