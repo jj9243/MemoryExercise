@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.androidtown.memoryexcercise" >
 
+    <uses-permission android:name = "android.permission.VIBRATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +25,7 @@
         <activity android:name=".Correct" />
         <activity android:name=".Incorrect" />
         <activity android:name=".NumRemeberQuiz" />
+        <activity android:name=".excercise4Activity" />
 
     </application>
 
