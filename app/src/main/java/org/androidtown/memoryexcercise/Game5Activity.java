@@ -15,13 +15,14 @@ import java.util.Random;
 
 public class Game5Activity extends AppCompatActivity {
 
-    TextView gameExplain, textCenter;
+    TextView gameExplain, textCenter, textQuestion;
     EditText underLine;
     GridLayout ansGrid;
     TextView[] text;
     Random random;
     int[] randNum;
     String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    String[] number = {"①","②","③","④"};
     String ans = "";
 
     int timerVal;
@@ -38,6 +39,7 @@ public class Game5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_game5);
 
         gameExplain = (TextView) findViewById(R.id.gameExplain);
+        textQuestion = (TextView)findViewById(R.id.textQuestion);
         ansGrid = (GridLayout) findViewById(R.id.ansGrid);
         text = new TextView[3];
         text[0] = (TextView) findViewById(R.id.text0);
@@ -45,8 +47,6 @@ public class Game5Activity extends AppCompatActivity {
         text[2] = (TextView) findViewById(R.id.text2);
 
         textCenter = (TextView) findViewById(R.id.textCenter);
-
-        underLine = (EditText) findViewById(R.id.underLine);
 
         random = new Random();
         randNum = new int[3];
@@ -78,6 +78,7 @@ public class Game5Activity extends AppCompatActivity {
         super.onStart();
         System.out.println("test get in onStart");
         // 3개의 알파벳을 random으로 고른다. 0 ~ 25
+
         for(int i = 0; i < 3; i++) {
             randNum[i] = random.nextInt(26);
             ans += alphabet[randNum[i]];
@@ -149,7 +150,7 @@ public class Game5Activity extends AppCompatActivity {
             }
 
             textCenter.setVisibility(View.VISIBLE);
-            underLine.setVisibility(View.GONE);
+            //underLine.setVisibility(View.GONE);
 
             //5초 뒤에 기억력 테스트 화면으로 이동
             timer.cancel();
@@ -157,13 +158,12 @@ public class Game5Activity extends AppCompatActivity {
         }
 
         protected void onCancelled() {
-
         }
     }
 
     void memoryTest() {
         gameExplain.setVisibility(View.VISIBLE);
-        gameExplain.setText("문자열은 무엇일까요?");
+        gameExplain.setText("아래의 질문에 답하시오");
 
         textCenter.setVisibility(View.GONE);
 
@@ -180,18 +180,19 @@ public class Game5Activity extends AppCompatActivity {
                 if(!tmp.equals(ans) && !tmp.equals(candidate[j])) cnt++;
             }
 
-            if(cnt == i) candidate[i] = tmp; //모두 다르면 확정
+            if(cnt == i) candidate[i] = number[i] + " " + tmp; //모두 다르면 확정
             else i--; //아닐 경우 다시...
         }
         // 그리고 4개의 선택지 중 하나의 선택지를 랜덤하게 골라서 정답을 넣는다.
         int ansIdx = random.nextInt(4);
-        candidate[ansIdx] = ans;
+        candidate[ansIdx] = number[ansIdx]+ " " +ans;
 
         for(int i = 0; i < 4; i++) { // 4개의 선택지 setting.
             ansBtn[i].setText(candidate[i]);
         }
 
         ansGrid.setVisibility(View.VISIBLE);
+        textQuestion.setVisibility(View.VISIBLE);
         for(int i = 0; i < 4; i++) {
             final int idx = i;
             final int aIdx = ansIdx;
