@@ -11,11 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:padding="5dp"
         android:text="문자열 기억하세요"
         android:textSize="40dp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -23,10 +23,12 @@
 
     <TextView
         android:id="@+id/text1"
-        android:layout_width="40dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/btn_bg_ex"
+        android:gravity="center"
         android:text=" "
         android:textAlignment="center"
         android:textSize="50dp"
@@ -37,9 +39,11 @@
 
     <TextView
         android:id="@+id/text0"
-        android:layout_width="40dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginRight="5dp"
+        android:background="@drawable/btn_bg_ex"
+        android:gravity="center"
         android:text=" "
         android:textAlignment="center"
         android:textSize="50dp"
@@ -49,9 +53,11 @@
 
     <TextView
         android:id="@+id/text2"
-        android:layout_width="40dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="5dp"
+        android:background="@drawable/btn_bg_ex"
+        android:gravity="center"
         android:text=" "
         android:textAlignment="center"
         android:textSize="50dp"
@@ -76,11 +82,11 @@
         android:id="@+id/textQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="올바른 문자열을 고르시오 "
         android:textSize="30dp"
         android:textStyle="bold"
         android:visibility="gone"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/ansGrid"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -105,16 +111,16 @@
             android:id="@+id/ansBtn0"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-
             android:layout_column="0"
+
             android:layout_gravity="left"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
-
             android:layout_marginTop="10dp"
+
             android:layout_row="0"
+            android:gravity="center"
 
             android:text="ABC"
             android:textSize="30dp" />
@@ -171,4 +177,19 @@
             android:textSize="30dp" />
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/noti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="각 문자는 3번 깜박입니다 "
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
