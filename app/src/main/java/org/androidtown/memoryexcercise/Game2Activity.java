@@ -106,6 +106,7 @@ public class Game2Activity extends AppCompatActivity {
         protected Integer doInBackground(Integer ... values) {
             // 4개의 버튼을 4번 깜박이기
             for(int i = 0; i < 8; i++) { // n번 깜박이기 위해서 n*2번 post()호출
+                if(isCancelled()) break; //*** 이게 없으면 종료에 시간이 걸리므로 back pressed 후 다시 시작할 때 느린 시작 현상
                 try {
                     Thread.sleep(1000); // 1초 간격으로
                 } catch(InterruptedException e) {
