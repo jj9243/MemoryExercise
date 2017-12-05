@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -164,6 +165,9 @@ public class NumRemeberQuiz extends AppCompatActivity {
             // 난이도 하강
             NumRemember.round /= 10;
 
+            // 틀렸을 때 진동
+            startVibrate();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
             builder.setTitle("게임상황");
@@ -230,5 +234,11 @@ public class NumRemeberQuiz extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    public void startVibrate()
+    {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
     }
 }
