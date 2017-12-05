@@ -40,11 +40,11 @@ public class NumRemeberQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_num_remeber_quiz);
 
-        editText = (EditText)findViewById(R.id.editText2);
+        editText = (EditText) findViewById(R.id.editText2);
         editText.requestFocus();
 
         randNumPref = getSharedPreferences("randNum", MODE_PRIVATE);
-        randomNumber = randNumPref.getInt("randNum",0);
+        randomNumber = randNumPref.getInt("randNum", 0);
 
 //        roundPref = getSharedPreferences("round",MODE_PRIVATE);
 //        round = roundPref.getInt("round",1);
@@ -60,7 +60,7 @@ public class NumRemeberQuiz extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String numStr = editText.getText().toString();
-                    if(numStr.equals("") || numStr.equals("-")) {// 사용자가 입력을 하지 않거나 숫자가 아닌 값을 입력한 경우
+                    if (numStr.equals("") || numStr.equals("-")) {// 사용자가 입력을 하지 않거나 숫자가 아닌 값을 입력한 경우
                         Toast.makeText(getApplicationContext(), "숫자를 입력해 주세요", Toast.LENGTH_SHORT).show(); // 안내 메시지
 
                         return true; // 키보드가 남아있음. return false하면 키보드 내려감.
@@ -78,8 +78,8 @@ public class NumRemeberQuiz extends AppCompatActivity {
         stageNumber++;
     }
 
-    public void checkNumber(int number){
-        if(isCorrect(number)){//맞았을 때
+    public void checkNumber(int number) {
+        if (isCorrect(number)) {//맞았을 때
 //            if(times<3) {
 //                times++;
 //
@@ -136,8 +136,7 @@ public class NumRemeberQuiz extends AppCompatActivity {
                         }
                     });
             builder.show();
-        }
-        else{//틀렸을 때
+        } else {//틀렸을 때
 //            if(times<3) {
 //                times++;
 //
@@ -201,8 +200,8 @@ public class NumRemeberQuiz extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-    public boolean isCorrect(int number){
-        if(number==randomNumber)
+    public boolean isCorrect(int number) {
+        if (number == randomNumber)
             return true;
         else
             return false;
@@ -217,27 +216,26 @@ public class NumRemeberQuiz extends AppCompatActivity {
     public void dialogShow() {
         //게임 종료 알림
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("종료하기");
+        builder.setTitle("게임종료");
         builder.setCancelable(false);
         builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
-        builder.setPositiveButton("예",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        NumRemeberQuiz.super.onBackPressed();
-                    }
-                });
-        builder.setNegativeButton("아니오",
+        builder.setPositiveButton("계속하기",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                         immhide.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
                     }
                 });
+        builder.setNegativeButton("홈으로",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        NumRemeberQuiz.super.onBackPressed();
+                    }
+                });
         builder.show();
     }
 
-    public void startVibrate()
-    {
+    public void startVibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(500);
     }

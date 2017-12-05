@@ -104,7 +104,7 @@ public class NumRemember extends AppCompatActivity {
 //                }
 //                else {
 //                    timerText.setText("숫자를 " + (4 - timerValue) + "초간 잘 기억해 주세요");
-                    countDown.setText((4 - timerValue) + "초후에 \n문제가 나옵니다.");
+                    countDown.setText((4 - timerValue) + "초후에 \n문제가 출제됩니다.");
                     timerValue++;
 //                }
 //                if(timerValue==3)

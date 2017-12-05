@@ -93,7 +93,7 @@ public class Excercise1Activity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 count--;
-                countdown.setText(count + "초 후에" + "\n" + " 문제가 나옵니다.");
+                countdown.setText(count + "초 후에" + "\n" + " 문제가 출제됩니다.");
             }
 
             @Override

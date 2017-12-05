@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:gravity="center"
-        android:text="4번 깜박인 후\n문제가 나옵니다."
+        android:text="4번 깜박인 후\n문제가 출제됩니다."
         android:textColor="@android:color/holo_red_dark"
         android:textSize="30dp"
         android:textStyle="bold"

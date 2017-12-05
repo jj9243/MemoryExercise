@@ -149,7 +149,7 @@ public class Game2Activity extends AppCompatActivity {
                 }
                 timerCount--;
                 if (timerCount != 0)
-                    textView2.setText(timerCount + "번 깜박인 후\n문제가 나옵니다.");
+                    textView2.setText(timerCount + "번 깜박인 후\n문제가 출제됩니다.");
 
             }
         }

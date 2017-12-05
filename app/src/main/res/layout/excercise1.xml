@@ -49,7 +49,7 @@
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
-        android:text="3초후에 \n문제가 나옵니다."
+        android:text="3초후에 \n문제가 출제됩니다."
         android:textColor="@android:color/holo_red_dark"
         android:textSize="30dp"
         android:textStyle="bold" />
