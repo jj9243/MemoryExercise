@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NumRemeberQuiz extends AppCompatActivity {
     //변수
@@ -57,7 +58,15 @@ public class NumRemeberQuiz extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    checkNumber(Integer.parseInt(editText.getText().toString()));
+                    String numStr = editText.getText().toString();
+                    if(numStr.equals("") || numStr.equals("-")) {// 사용자가 입력을 하지 않거나 숫자가 아닌 값을 입력한 경우
+                        Toast.makeText(getApplicationContext(), "숫자를 입력해 주세요", Toast.LENGTH_SHORT).show(); // 안내 메시지
+
+                        return true; // 키보드가 남아있음. return false하면 키보드 내려감.
+                    }
+
+                    int number = Integer.parseInt(editText.getText().toString());
+                    checkNumber(number);
                     return true;
                 }
                 return false;
