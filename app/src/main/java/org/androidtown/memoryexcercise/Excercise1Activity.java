@@ -125,7 +125,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
                     builder.setCancelable(false);
-                    builder.setTitle("게임상황");
+                    builder.setTitle("맞았습니다");
 
                     //마지막 문제일경우
                     if(problemNumber == 5)
@@ -143,8 +143,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //마지막 문제가 아닐 경우
                     else {
-                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
-                    builder.setPositiveButton("예",
+                    builder.setPositiveButton("다음게임",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
@@ -152,7 +151,7 @@ public class Excercise1Activity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             });
-                    builder.setNegativeButton("아니오",
+                    builder.setNegativeButton("홈으로",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     answerCount = 0;
@@ -169,7 +168,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
                     builder.setCancelable(false);
-                    builder.setTitle("게임상황");
+                    builder.setTitle("틀렸습니다");
 
                     //마지막 문제일경우
                     if (problemNumber == 5) {
@@ -187,8 +186,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //마지막 문제가 아닌경우
                     else {
                         startVibrate();
-                        builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
-                        builder.setPositiveButton("예",
+                        builder.setPositiveButton("다음게임",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
@@ -196,7 +194,7 @@ public class Excercise1Activity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                        builder.setNegativeButton("아니오",
+                        builder.setNegativeButton("홈으로",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         if (problemNumber != 5) {
@@ -226,7 +224,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
                     builder.setCancelable(false);
-                    builder.setTitle("게임상황");
+                    builder.setTitle("맞았습니다");
 
                     //마지막 문제일경우
                     if(problemNumber == 5)
@@ -244,8 +242,7 @@ public class Excercise1Activity extends AppCompatActivity {
 
                     //마지막 문제가 아닐 경우
                     else {
-                        builder.setMessage("맞았습니다.\n(다음문제로 넘어가시겠습니까?)");
-                        builder.setPositiveButton("예",
+                        builder.setPositiveButton("다음게임",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
@@ -253,7 +250,7 @@ public class Excercise1Activity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                        builder.setNegativeButton("아니오",
+                        builder.setNegativeButton("홈으로",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         answerCount = 0;
@@ -270,12 +267,11 @@ public class Excercise1Activity extends AppCompatActivity {
                     //게임 상황 알림
                     AlertDialog.Builder builder = new AlertDialog.Builder(Excercise1Activity.this);
                     builder.setCancelable(false);
-                    builder.setTitle("게임상황");
+                    builder.setTitle("틀렸습니다");
 
                     //마지막 문제일경우
                     if (problemNumber == 5) {
                         startVibrate();
-                        builder.setMessage("틀렸습니다.\n(마지막 문제입니다)");
                         builder.setNegativeButton("예",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -288,8 +284,7 @@ public class Excercise1Activity extends AppCompatActivity {
                     //마지막 문제가 아닌경우
                     else {
                         startVibrate();
-                        builder.setMessage("틀렸습니다.\n(다음문제로 넘어가시겠습니까?)");
-                        builder.setPositiveButton("예",
+                        builder.setPositiveButton("다음게임",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(getApplicationContext(), Excercise1Activity.class);
@@ -297,7 +292,7 @@ public class Excercise1Activity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                        builder.setNegativeButton("아니오",
+                        builder.setNegativeButton("홈으로",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         if (problemNumber != 5) {
@@ -462,19 +457,19 @@ public class Excercise1Activity extends AppCompatActivity {
         //게임 종료 알림
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("종료하기");
-        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
-        builder.setPositiveButton("예",
+        builder.setTitle("게임종료");
+        builder.setMessage("게임을 종료 하시겠습니까?\n(* 게임 데이터는 사라집니다)");
+        builder.setPositiveButton("계속하기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.setNegativeButton("홈으로",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         answerCount = 0;
                         problemNumber = 0;
                         Excercise1Activity.super.onBackPressed();
-                    }
-                });
-        builder.setNegativeButton("아니오",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
                     }
                 });
         builder.show();

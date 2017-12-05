@@ -152,10 +152,18 @@ public class NumRemember extends AppCompatActivity {
     public void dialogShow() {
         //게임 종료 알림
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("종료하기");
+        builder.setTitle("게임종료");
         builder.setCancelable(false);
-        builder.setMessage("게임을 종료 하시겠습니까?\n(*게임 데이터는 사라집니다)");
-        builder.setPositiveButton("예",
+        builder.setMessage("게임을 종료 하시겠습니까?\n(* 게임 데이터는 사라집니다)");
+        builder.setPositiveButton("계속하기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        immhide.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                    }
+                });
+        builder.setNegativeButton("홈으로",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         NumRemember.super.onBackPressed();
@@ -166,13 +174,6 @@ public class NumRemember extends AppCompatActivity {
                             finishTimer.cancel();
 
                         finish();
-                    }
-                });
-        builder.setNegativeButton("아니오",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        immhide.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
                     }
                 });
         builder.show();
