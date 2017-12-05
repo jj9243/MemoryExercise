@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +21,8 @@ public class Game2Activity extends AppCompatActivity {
     public ImageButton[] buttonArr = new ImageButton[9];
     public String buttonId[] = {"c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"};
     TextView textView1, textView2, textView3, textView4, textView5, textView6;
+
+    public ConstraintLayout buttonLayout;
 
     Random random;
     BackgroundTask task;
@@ -54,6 +57,8 @@ public class Game2Activity extends AppCompatActivity {
         textView4 = (TextView) findViewById(R.id.textView4);
         //textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
+
+        buttonLayout = (ConstraintLayout)findViewById(R.id.buttonLayout);
 
         //문제 수증가
         stageNumber++;
@@ -149,15 +154,17 @@ public class Game2Activity extends AppCompatActivity {
                 }
                 timerCount--;
                 if (timerCount != 0)
-                    textView2.setText(timerCount + "번 깜박인 후\n문제가 출제됩니다.");
+                    textView2.setText(timerCount + "번 깜박인 후\n문제가 출제됩니다");
 
             }
         }
 
         protected void onPostExecute(Integer result) {
-            for (int i = 0; i < 9; i++) {
-                buttonArr[i].setVisibility(View.GONE);
-            }
+//            for (int i = 0; i < 9; i++) {
+//                buttonArr[i].setVisibility(View.INVISIBLE);
+//            }
+            buttonLayout.setVisibility(View.GONE);
+
             textView1.setVisibility(View.GONE);
             textView2.setVisibility(View.GONE);
             textView3.setVisibility(View.VISIBLE);
@@ -173,12 +180,13 @@ public class Game2Activity extends AppCompatActivity {
     }
 
     void MemoryTest() {
-        for (int i = 0; i < 9; i++) {
-            buttonArr[i].setVisibility(View.VISIBLE);
-        }
+//        for (int i = 0; i < 9; i++) {
+//            buttonArr[i].setVisibility(View.VISIBLE);
+//        }
+        buttonLayout.setVisibility(View.VISIBLE);
         textView1.setVisibility(View.VISIBLE);
         textView3.setVisibility(View.GONE);
-        textView1.setText("깜박이를 찾아주세요");
+        textView1.setText("깜박거린 동그라미를\n찾아보세요");
 
         // 찾은 깜박이 수 표시
         textView4.setVisibility(View.VISIBLE);
@@ -202,7 +210,7 @@ public class Game2Activity extends AppCompatActivity {
                                 buttonArr[buttonIdx].setImageResource(R.drawable.oval2);
                                 isAnswer = true;
                                 ansCnt++;
-                                textView4.setText("찾은 깜박이(" + ansCnt + "/4)");
+                                textView4.setText("찾은 동그라미(" + ansCnt + "/4)");
                                 break;
                             } else { // 이미 고른 답을 또 눌렀다면
                                 isAnswer = true;

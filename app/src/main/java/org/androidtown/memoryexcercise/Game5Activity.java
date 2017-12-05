@@ -169,7 +169,7 @@ public class Game5Activity extends AppCompatActivity {
 
     void memoryTest() {
         gameExplain.setVisibility(View.VISIBLE);
-        gameExplain.setText("아래의 질문에\n답하세요");
+        gameExplain.setText("아래 질문에\n답하세요");
 
         textCenter.setVisibility(View.GONE);
 

@@ -49,7 +49,7 @@
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
-        android:text="3초후에 \n문제가 출제됩니다."
+        android:text="3초 후에 \n문제가 출제됩니다"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -62,7 +62,7 @@
         android:layout_above="@+id/answerLinear"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="이전 사진과 같은 사진인가요?"
+        android:text="기억한 사진과 같은 사진인가요?"
         android:textSize="25dp"
         android:textStyle="bold"
         android:visibility="invisible" />
