@@ -107,6 +107,7 @@ public class Game2Activity extends AppCompatActivity {
         super.onStop();
 
         task.cancel(true);
+        finish(); // 다른 화면으로 넘어갈 때, 종료시킨다.
     }
 
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {
