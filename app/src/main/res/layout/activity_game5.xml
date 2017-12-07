@@ -13,7 +13,7 @@
         android:layout_marginTop="40dp"
         android:gravity="center"
         android:padding="5dp"
-        android:text="문자열을 기억하세요"
+        android:text="알파벳을 기억하세요"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.5"
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="올바른 문자열을 선택하세요"
+        android:text="올바른 알파벳을 선택하세요"
         android:textSize="30dp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -175,7 +175,6 @@
 
             android:text="ABC"
             android:textSize="30dp" />
-
     </GridLayout>
 
     <TextView
